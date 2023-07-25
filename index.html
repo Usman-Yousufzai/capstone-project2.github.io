@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up Form</title>
+  <style>
+    /* Styles for the form container and pages */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .page {
+      display: none;
+    }
+    .page.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="page sign active">
+      <h1>Sign In</h1>
+      <form onsubmit="return authenticateUser(event)">
+        <label for="signin-email">Email</label>
+        <input type="email" id="signin-email" name="email" required>
+
+        <label for="signin-password">Password</label>
+        <input type="password" id="signin-password" name="password" required>
+
+        <button type="submit">Sign In</button>
+      </form>
+      <button id="signup-btn" onclick="togglePages()">Don't have an account? Sign Up</button>
+    </div>
+
+    <div class="page signup">
+      <h1>Sign Up</h1>
+      <form>
+        <label for="signup-username">Username</label>
+        <input type="text" id="signup-username" name="username" required>
+
+        <label for="signup-email">Email</label>
+        <input type="email" id="signup-email" name="email" required>
+
+        <label for="signup-password">Password</label>
+        <input type="password" id="signup-password" name="password" required>
+
+        <button type="submit">Sign Up</button>
+      </form>
+      <button id="signin-btn" onclick="togglePages()">Already have an account? Sign In</button>
+    </div>
+
+    <div class="page products">
+      <h1>Welcome to the Products Page!</h1>
+      <!-- Product listing and other content for the products page -->
+    </div>
+  </div>
+
+  <script>
+    // Get references to the sign-in, sign-up, and products pages
+    const signInPage = document.querySelector('.page.sign');
+    const signUpPage = document.querySelector('.page.signup');
+    const productsPage = document.querySelector('.page.products');
+
+    // Get references to the buttons
+    const signInBtn = document.getElementById('signin-btn');
+    const signUpBtn = document.getElementById('signup-btn');
+
+    // Function to toggle between sign-in and sign-up pages
+    function togglePages() {
+      signInPage.classList.toggle('active');
+      signUpPage.classList.toggle('active');
+    }
+
+    // Function to authenticate the user
+    function authenticateUser(event) {
+      event.preventDefault();
+
+      // Get email and password from the form
+      const emailInput = document.getElementById('signin-email').value;
+      const passwordInput = document.getElementById('signin-password').value;
+
+      // Check if the email and password match the pre-defined credentials
+      const savedEmail = 'user@example.com';
+      const savedPassword = 'password123';
+
+      if (emailInput === savedEmail && passwordInput === savedPassword) {
+        // If credentials match, show the products page
+        signInPage.style.display = 'none';
+        productsPage.style.display = 'block';
+      } else {
+        // If credentials don't match, display an error message
+        alert('Invalid email or password. Please try again.');
+      }
+    }
+  </script>
+</body>
+</html>
